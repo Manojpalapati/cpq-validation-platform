@@ -21,9 +21,18 @@ public class StatusUpdater {
     public void setStatus(String documentId, String status) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("status", status);
-        if ("IN_PROGRESS".equals(status)) {
+        
+        // Also update cpqValidationStatus for CPQ validations
+        if ("CPQ_IN_PROGRESS".equals(status) || "IN_PROGRESS".equals(status)) {
+            payload.put("cpqValidationStatus", "IN_PROGRESS");
             payload.put("startedAt", Instant.now().toString());
-        } else if ("PASSED".equals(status) || "FAILED".equals(status)) {
+        } else if ("CPQ_DONE".equals(status) || "PASSED".equals(status)) {
+            payload.put("cpqValidationStatus", "DONE");
+            payload.put("status", "CPQ_DONE");
+            payload.put("verifiedAt", Instant.now().toString());
+        } else if ("CPQ_FAILED".equals(status) || "FAILED".equals(status)) {
+            payload.put("cpqValidationStatus", "FAILED");
+            payload.put("status", "CPQ_FAILED");
             payload.put("verifiedAt", Instant.now().toString());
         }
 

@@ -25,7 +25,7 @@ public class CPQValidationRunner {
     private final ResultAggregator aggregator = new ResultAggregator();
 
     public void run(String documentId, String cpqUrl) {
-        statusUpdater.setStatus(documentId, "IN_PROGRESS");
+        statusUpdater.setStatus(documentId, "CPQ_IN_PROGRESS");
 
         Page page = BrowserContextManager.newPageWithStorage();
         CPQPage cpq = new CPQPage(page);
@@ -42,7 +42,7 @@ public class CPQValidationRunner {
         Map<String, Object> summary = aggregator.summarize(matched, cpqRows, cpqRows);
         resultWriter.writeResult(documentId, summary);
 
-        statusUpdater.setStatus(documentId, matched ? "PASSED" : "FAILED");
+        statusUpdater.setStatus(documentId, matched ? "CPQ_DONE" : "CPQ_FAILED");
         log.info("CPQ validation finished for {} with matched={}", documentId, matched);
     }
 }
