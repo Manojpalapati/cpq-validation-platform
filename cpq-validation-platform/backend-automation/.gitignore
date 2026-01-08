@@ -1,0 +1,11 @@
+target/
+.idea/
+.classpath
+.project
+.settings/
+*.iml
+auth/*
+!auth/.gitkeep
+*.log
+.env
+*.DS_Store
