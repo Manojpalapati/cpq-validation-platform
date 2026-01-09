@@ -1,0 +1,167 @@
+# =============================================================================
+# CPQ Validation Platform - Requirements
+# =============================================================================
+# This file contains all system requirements, dependencies, and configuration
+# needed to run the CPQ Validation Platform project.
+# =============================================================================
+
+# =============================================================================
+# SYSTEM REQUIREMENTS
+# =============================================================================
+
+# Frontend Requirements:
+# - Node.js >= 18.0.0 (recommended: 18.x or 20.x LTS)
+# - npm >= 9.0.0 (comes with Node.js)
+# - Modern web browser (Chrome, Firefox, Edge, Safari)
+
+# Backend Requirements:
+# - Java JDK 17 or higher
+# - Maven >= 3.8.0
+# - Playwright browsers (installed automatically via Maven)
+
+# =============================================================================
+# FRONTEND DEPENDENCIES (React/Vite)
+# =============================================================================
+# Location: cpq-validation-platform/frontend-react/package.json
+# Install with: npm install
+
+# Production Dependencies:
+react==18.3.1
+react-dom==18.3.1
+firebase==11.0.0
+
+# Development Dependencies:
+vite==5.2.0
+@vitejs/plugin-react==4.3.0
+
+# =============================================================================
+# BACKEND DEPENDENCIES (Java/Maven)
+# =============================================================================
+# Location: cpq-validation-platform/backend-automation/pom.xml
+# Install with: mvn dependency:resolve
+
+# Automation Framework:
+# - com.microsoft.playwright:playwright:1.41.2
+
+# Excel Processing:
+# - org.apache.poi:poi-ooxml:5.2.5
+
+# Firebase Admin SDK:
+# - com.google.firebase:firebase-admin:9.2.0
+
+# JSON Processing:
+# - com.fasterxml.jackson.core:jackson-databind:2.17.1
+
+# Logging:
+# - org.slf4j:slf4j-api:2.0.12
+# - ch.qos.logback:logback-classic:1.4.14
+
+# Testing:
+# - org.junit.jupiter:junit-jupiter:5.10.1
+
+# Build Tools:
+# - Maven Compiler Plugin: 3.11.0
+# - Maven Surefire Plugin: 3.2.5
+
+# =============================================================================
+# ENVIRONMENT VARIABLES
+# =============================================================================
+
+# Frontend Environment Variables (.env file in frontend-react/)
+# Required for Firebase integration:
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+VITE_FIREBASE_APP_ID=your_firebase_app_id
+
+# Backend Environment Variables
+# Required for Firebase Admin SDK:
+FIREBASE_SERVICE_ACCOUNT_JSON=path/to/service-account-key.json
+# OR provide the JSON content directly as a string
+
+# Optional Backend Environment Variables:
+OKTA_LOGIN_URL=https://your-company.okta.com/app/your-app-id/sso/saml
+CPQ_URL=your_cpq_application_url
+
+# =============================================================================
+# INSTALLATION STEPS
+# =============================================================================
+
+# 1. Install Frontend Dependencies:
+#    cd cpq-validation-platform/frontend-react
+#    npm install
+
+# 2. Install Backend Dependencies:
+#    cd cpq-validation-platform/backend-automation
+#    mvn dependency:resolve
+#    mvn playwright:install
+
+# 3. Configure Environment Variables:
+#    - Create .env file in frontend-react/ with Firebase config
+#    - Set FIREBASE_SERVICE_ACCOUNT_JSON environment variable for backend
+#    - Set OKTA_LOGIN_URL if using Okta SSO
+
+# 4. Run Frontend Development Server:
+#    cd cpq-validation-platform/frontend-react
+#    npm run dev
+#    Server will start on http://localhost:5173
+
+# 5. Build Backend:
+#    cd cpq-validation-platform/backend-automation
+#    mvn clean compile
+
+# 6. Run Backend Tests:
+#    cd cpq-validation-platform/backend-automation
+#    mvn test
+
+# =============================================================================
+# ADDITIONAL REQUIREMENTS
+# =============================================================================
+
+# Firebase Setup:
+# - Firebase project created in Firebase Console
+# - Firestore database enabled
+# - Service account key generated and downloaded
+# - Firebase web app configuration obtained
+
+# Playwright Browsers:
+# - Automatically installed via Maven plugin
+# - Requires internet connection for first-time setup
+# - Browsers stored in ~/.cache/ms-playwright/
+
+# File Structure:
+# - auth/ directory for storing browser session state files
+# - test-data/ directory for test Excel files and form data
+# - public/comparator/ directory for embedded comparator tool
+
+# =============================================================================
+# OPTIONAL TOOLS
+# =============================================================================
+
+# Development Tools (recommended):
+# - Git (for version control)
+# - IDE with Java and JavaScript support (IntelliJ IDEA, VS Code, Eclipse)
+# - Chrome DevTools or Firefox Developer Tools
+# - Postman or similar API testing tool
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+# - Frontend can run without Firebase (uses localStorage fallback)
+# - Backend requires Firebase service account for full functionality
+# - Playwright browsers must be installed before running automation tests
+# - Ensure Java 17+ is set as JAVA_HOME environment variable
+# - Maven should be in system PATH
+
+# =============================================================================
+# VERSION INFORMATION
+# =============================================================================
+
+# Project Version: 1.0.0-SNAPSHOT
+# Frontend Framework: React 18.3.1 with Vite 5.2.0
+# Backend Framework: Java 17 with Maven
+# Automation Framework: Playwright 1.41.2
+# Firebase SDK: Frontend 11.0.0, Backend Admin 9.2.0
